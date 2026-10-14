@@ -122,6 +122,7 @@
     <div class="actions">
       <button class="btn btn-primary" id="saveBtn">Save</button>
       <button class="btn btn-ghost" id="testBtn">Test connection</button>
+      <button class="btn btn-danger" id="logoutBtn">Logout</button>
     </div>
     <p class="note">Token sirf aapke browser (localStorage) me rehta hai aur sirf GitHub API ko bheja jata hai. Shared computer pe use na karo.</p>
   </div>
@@ -256,6 +257,15 @@ Zee Cinema | https://.../logo.png | https://.../index.m3u8"></textarea>
   }
   function readForm(){ cfg.token=$("token").value.trim(); cfg.owner=$("owner").value.trim(); cfg.repo=$("repo").value.trim(); cfg.branch=($("branch").value.trim()||"main"); }
   function saveCfg(){ readForm(); localStorage.setItem("iptv_cfg",JSON.stringify(cfg)); log("Settings saved.","ok"); }
+  function logout(){
+    localStorage.removeItem("iptv_cfg");
+    cfg.token=""; cfg.owner=""; cfg.repo=""; cfg.branch="main";
+    $("token").value=""; $("owner").value="project9793"; $("repo").value="hindi-tv"; $("branch").value="main";
+    document.querySelectorAll("select.fileSel").forEach(s=>s.innerHTML='<option value="">— load playlists first —</option>');
+    $("addBtn").disabled=true; $("bulkBtn").disabled=true;
+    manageEntries=[]; manageFile=""; $("manageTable").style.display="none"; $("manageCount").textContent="";
+    log("Logged out — saved token browser se hata diya gaya.","ok");
+  }
   async function testConnection(){
     readForm();
     if(!cfg.token||!cfg.owner||!cfg.repo){ log("Token, owner aur repo bharo.","warn"); return; }
@@ -458,6 +468,7 @@ Zee Cinema | https://.../logo.png | https://.../index.m3u8"></textarea>
   /* ---------- wire ---------- */
   $("saveBtn").addEventListener("click",saveCfg);
   $("testBtn").addEventListener("click",testConnection);
+  $("logoutBtn").addEventListener("click",logout);
   $("addBtn").addEventListener("click",addChannel);
   $("bulkBtn").addEventListener("click",bulkAdd);
   $("createBtn").addEventListener("click",createPlaylist);
