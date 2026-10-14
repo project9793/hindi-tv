@@ -3,72 +3,53 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Add Channel — India IPTV Playlists</title>
+<title>Playlist Manager — India IPTV</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Azeret+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#f6f5f2;
-    --surface:#ffffff;
-    --surface-2:#f0efea;
-    --border:rgba(15,23,42,.10);
-    --text:#16212e;
-    --text-dim:#5c6b7a;
-    --accent:#0e7490;
-    --accent-strong:#0b5f76;
-    --accent-dim:#e2f1f5;
-    --ok:#15803d;
-    --ok-dim:#e4f3e8;
-    --warn:#b45309;
-    --warn-dim:#fbf0dd;
-    --err:#b91c1c;
-    --err-dim:#fbe6e6;
+    --bg:#f6f5f2; --surface:#ffffff; --surface-2:#f0efea;
+    --border:rgba(15,23,42,.10); --text:#16212e; --text-dim:#5c6b7a;
+    --accent:#0e7490; --accent-strong:#0b5f76; --accent-dim:#e2f1f5;
+    --ok:#15803d; --ok-dim:#e4f3e8; --warn:#b45309; --warn-dim:#fbf0dd;
+    --err:#b91c1c; --err-dim:#fbe6e6;
     --radius:14px;
     --font-body:'Plus Jakarta Sans',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
     --font-mono:'Azeret Mono',ui-monospace,Menlo,Consolas,monospace;
   }
   @media (prefers-color-scheme: dark){
     :root{
-      --bg:#10151c;
-      --surface:#182029;
-      --surface-2:#1f2934;
-      --border:rgba(255,255,255,.10);
-      --text:#e7edf3;
-      --text-dim:#9aa8b6;
-      --accent:#22a5c0;
-      --accent-strong:#4cc3dd;
-      --accent-dim:#12333d;
-      --ok:#4ade80; --ok-dim:#12301d;
-      --warn:#fbbf24; --warn-dim:#33280d;
+      --bg:#10151c; --surface:#182029; --surface-2:#1f2934;
+      --border:rgba(255,255,255,.10); --text:#e7edf3; --text-dim:#9aa8b6;
+      --accent:#22a5c0; --accent-strong:#4cc3dd; --accent-dim:#12333d;
+      --ok:#4ade80; --ok-dim:#12301d; --warn:#fbbf24; --warn-dim:#33280d;
       --err:#f87171; --err-dim:#331616;
     }
   }
   *{box-sizing:border-box}
-  body{
-    margin:0;background:var(--bg);color:var(--text);font-family:var(--font-body);
+  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-body);
     line-height:1.55;-webkit-font-smoothing:antialiased;
     background-image:radial-gradient(60rem 30rem at 80% -10%, var(--accent-dim), transparent 70%);
-    background-repeat:no-repeat;
-  }
-  .wrap{max-width:860px;margin:0 auto;padding:34px 20px 80px}
-  header{margin-bottom:26px}
+    background-repeat:no-repeat;}
+  .wrap{max-width:900px;margin:0 auto;padding:34px 20px 90px}
   .eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:8px}
   .eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent)}
-  h1{font-size:clamp(26px,4vw,36px);margin:12px 0 6px;letter-spacing:-.02em;line-height:1.15}
-  header p{margin:0;color:var(--text-dim);max-width:60ch}
+  h1{font-size:clamp(25px,4vw,34px);margin:12px 0 6px;letter-spacing:-.02em;line-height:1.15}
+  header p{margin:0;color:var(--text-dim);max-width:62ch}
   .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px;margin-bottom:18px;box-shadow:0 1px 2px rgba(15,23,42,.04)}
   .card h2{font-size:16px;margin:0 0 4px;display:flex;align-items:center;gap:10px}
   .num{font-family:var(--font-mono);font-size:12px;color:var(--accent);border:1px solid var(--border);border-radius:999px;padding:1px 9px}
-  .card .hint{color:var(--text-dim);font-size:13.5px;margin:0 0 16px}
+  .hint{color:var(--text-dim);font-size:13.5px;margin:0 0 16px}
   label{display:block;font-size:13px;font-weight:600;margin:14px 0 6px}
   label .opt{font-weight:400;color:var(--text-dim)}
-  input,select{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:var(--surface-2);color:var(--text);font-family:var(--font-body);font-size:14px}
-  input:focus,select:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:transparent}
+  input,select,textarea{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:var(--surface-2);color:var(--text);font-family:var(--font-body);font-size:14px}
+  textarea{font-family:var(--font-mono);font-size:12.5px;min-height:150px;resize:vertical}
+  input:focus,select:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:transparent}
   input[type=password]{font-family:var(--font-mono);letter-spacing:.04em}
   .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
   .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
-  @media(max-width:600px){.row,.row3{grid-template-columns:1fr}}
+  @media(max-width:620px){.row,.row3{grid-template-columns:1fr}}
   .btn{appearance:none;border:1px solid transparent;border-radius:10px;padding:11px 18px;font-family:var(--font-body);font-weight:600;font-size:14px;cursor:pointer;transition:transform .06s ease,background .15s ease}
   .btn:active{transform:translateY(1px)}
   .btn-primary{background:var(--accent);color:#fff}
@@ -76,11 +57,14 @@
   .btn-primary:disabled{opacity:.5;cursor:not-allowed}
   .btn-ghost{background:transparent;border-color:var(--border);color:var(--text)}
   .btn-ghost:hover{background:var(--surface-2)}
+  .btn-sm{padding:6px 11px;font-size:12.5px;border-radius:8px}
+  .btn-danger{background:transparent;border-color:var(--border);color:var(--err)}
+  .btn-danger:hover{background:var(--err-dim)}
   .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
   .chk{display:flex;align-items:center;gap:9px;margin-top:14px;font-size:13.5px;font-weight:500}
   .chk input{width:auto}
   pre{background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:12px 14px;font-family:var(--font-mono);font-size:12.5px;overflow-x:auto;white-space:pre-wrap;word-break:break-all;margin:14px 0 0}
-  #log{margin-top:16px;display:flex;flex-direction:column;gap:8px}
+  #log{margin-top:16px;display:flex;flex-direction:column;gap:8px;max-height:240px;overflow:auto}
   .msg{font-size:13px;padding:9px 12px;border-radius:9px;border:1px solid var(--border);font-family:var(--font-mono)}
   .msg.ok{background:var(--ok-dim);color:var(--ok);border-color:transparent}
   .msg.err{background:var(--err-dim);color:var(--err);border-color:transparent}
@@ -89,23 +73,40 @@
   .note{font-size:12.5px;color:var(--text-dim);margin-top:12px;border-left:3px solid var(--border);padding-left:12px}
   a{color:var(--accent)}
   code{font-family:var(--font-mono);font-size:12.5px;background:var(--surface-2);padding:1px 5px;border-radius:5px}
+  .tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+  .tab{background:transparent;border:1px solid var(--border);border-radius:999px;padding:8px 15px;font-family:var(--font-body);font-weight:600;font-size:13.5px;color:var(--text-dim);cursor:pointer}
+  .tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
+  .panel{display:none}
+  .panel.active{display:block}
+  .tblwrap{overflow-x:auto;border:1px solid var(--border);border-radius:10px;margin-top:14px}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:middle}
+  th{font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--text-dim);background:var(--surface-2);position:sticky;top:0}
+  tr:last-child td{border-bottom:none}
+  td.name{font-weight:600;white-space:nowrap}
+  td.url{font-family:var(--font-mono);font-size:11.5px;color:var(--text-dim);max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  td.grp{color:var(--text-dim);white-space:nowrap}
+  .logo{width:34px;height:20px;object-fit:contain;background:var(--surface-2);border-radius:4px}
+  .editrow{background:var(--surface-2)}
+  .editrow input{margin:3px 0}
+  .muted{color:var(--text-dim);font-size:13px}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
     <div class="eyebrow">Playlist Manager</div>
-    <h1>Add a channel to your GitHub playlist</h1>
-    <p>Naam, logo aur stream URL bharo — ye page seedha aapke GitHub repo ki <code>.m3u</code> file me channel add kar dega. Kuch install karne ki zaroorat nahi.</p>
+    <h1>Manage your GitHub IPTV playlists</h1>
+    <p>Channels add karo (ek-ek ya bulk), aur apni playlist ke channels dekho, edit karo ya delete karo — sab seedha GitHub repo me commit hota hai.</p>
   </header>
 
   <div class="card">
     <h2><span class="num">1</span> GitHub connection</h2>
-    <p class="hint">Ek <b>fine-grained personal access token</b> banao jisme sirf is repo ke liye <b>Contents: Read and write</b> permission ho.</p>
+    <p class="hint">Fine-grained token banao jisme is repo ke liye <b>Contents: Read and write</b> ho.</p>
     <label>Personal access token</label>
     <input id="token" type="password" placeholder="github_pat_..." autocomplete="off" spellcheck="false">
     <div class="row3" style="margin-top:6px">
-      <div><label>Owner (username)</label><input id="owner" placeholder="project9793"></div>
+      <div><label>Owner</label><input id="owner" placeholder="project9793"></div>
       <div><label>Repository</label><input id="repo" placeholder="hindi-tv"></div>
       <div><label>Branch</label><input id="branch" placeholder="main"></div>
     </div>
@@ -113,47 +114,75 @@
       <button class="btn btn-primary" id="saveBtn">Save</button>
       <button class="btn btn-ghost" id="testBtn">Test connection</button>
     </div>
-    <p class="note">Token sirf aapke browser me (localStorage) save hota hai aur kisi aur jagah nahi jata — sirf GitHub API ko bheja jata hai. Public/shared computer pe use na karo.</p>
+    <p class="note">Token sirf aapke browser (localStorage) me rehta hai aur sirf GitHub API ko bheja jata hai. Shared computer pe use na karo.</p>
   </div>
 
-  <div class="card">
-    <h2><span class="num">2</span> New channel</h2>
-    <p class="hint">Pehle connection save karo, phir playlist list load hogi.</p>
+  <div class="tabs">
+    <button class="tab active" data-p="add">Add one</button>
+    <button class="tab" data-p="bulk">Bulk add</button>
+    <button class="tab" data-p="manage">Manage</button>
+    <button class="tab" data-p="new">New playlist</button>
+  </div>
+
+  <!-- ADD ONE -->
+  <div class="card panel active" id="p-add">
+    <h2>Add a single channel</h2>
+    <p class="hint">Playlist chuno, phir channel ki details bharo.</p>
     <div class="row">
-      <div>
-        <label>Playlist file</label>
-        <select id="file"><option value="">— load playlists first —</option></select>
-      </div>
-      <div>
-        <label>Group / category <span class="opt">(optional)</span></label>
-        <input id="group" placeholder="e.g. Movies">
-      </div>
+      <div><label>Playlist file</label><select id="file" class="fileSel"><option value="">— load playlists first —</option></select></div>
+      <div><label>Group / category <span class="opt">(optional)</span></label><input id="group" placeholder="e.g. Movies"></div>
     </div>
-    <label>Channel name</label>
-    <input id="name" placeholder="e.g. Star Gold HD">
-    <label>Logo URL <span class="opt">(optional — khaali chhodo to placeholder lag jayega)</span></label>
-    <input id="logo" placeholder="https://.../logo.png">
-    <label>Stream URL</label>
-    <input id="url" placeholder="https://.../index.m3u8">
-    <div class="chk"><input type="checkbox" id="alsoIndia"><label for="alsoIndia" style="margin:0;font-weight:500">Ise <code>india.m3u</code> (combined) me bhi add karo</label></div>
-
+    <label>Channel name</label><input id="name" placeholder="e.g. Star Gold HD">
+    <label>Logo URL <span class="opt">(optional — khaali chhodo to placeholder)</span></label><input id="logo" placeholder="https://.../logo.png">
+    <label>Stream URL</label><input id="url" placeholder="https://.../index.m3u8">
+    <div class="chk"><input type="checkbox" id="alsoIndia"><label for="alsoIndia" style="margin:0;font-weight:500">Ise <code>india.m3u</code> me bhi add karo</label></div>
     <pre id="preview">#EXTINF line preview…</pre>
-    <div class="actions">
-      <button class="btn btn-primary" id="addBtn" disabled>Add channel</button>
-      <button class="btn btn-ghost" id="reloadBtn">Reload playlists</button>
-    </div>
-    <div id="log"></div>
+    <div class="actions"><button class="btn btn-primary" id="addBtn" disabled>Add channel</button></div>
   </div>
 
-  <div class="card">
-    <h2><span class="num">3</span> Naya playlist banao <span class="opt" style="font-weight:400;color:var(--text-dim);font-size:13px">(optional)</span></h2>
-    <p class="hint">Agar aap ek nayi category file banana chahte ho (jaise <code>hindi-movies.m3u</code>), uska naam daalo.</p>
+  <!-- BULK -->
+  <div class="card panel" id="p-bulk">
+    <h2>Bulk add channels</h2>
+    <p class="hint">Ek saath kai channels add karo. Ek line per channel, format: <code>Name | Logo | URL</code> (logo optional — <code>Name | URL</code> bhi chalega). Ya seedha M3U text (<code>#EXTINF…</code>) paste kar do.</p>
+    <div class="row">
+      <div><label>Playlist file</label><select id="fileBulk" class="fileSel"><option value="">— load playlists first —</option></select></div>
+      <div><label>Group / category <span class="opt">(default for all)</span></label><input id="groupBulk" placeholder="e.g. Movies"></div>
+    </div>
+    <label>Channels</label>
+    <textarea id="bulkText" placeholder="Star Gold HD | https://.../index.m3u8
+Zee Cinema | https://.../logo.png | https://.../index.m3u8"></textarea>
+    <div class="chk"><input type="checkbox" id="alsoIndiaBulk"><label for="alsoIndiaBulk" style="margin:0;font-weight:500">Sab ko <code>india.m3u</code> me bhi add karo</label></div>
+    <div class="actions"><button class="btn btn-primary" id="bulkBtn" disabled>Add all</button></div>
+  </div>
+
+  <!-- MANAGE -->
+  <div class="card panel" id="p-manage">
+    <h2>Manage a playlist</h2>
+    <p class="hint">Playlist chuno — uske saare channels dikhenge. Kisi ko edit ya delete kar sakte ho.</p>
+    <div class="row">
+      <div><label>Playlist file</label><select id="fileManage" class="fileSel"><option value="">— load playlists first —</option></select></div>
+      <div><label>Search <span class="opt">(naam/URL)</span></label><input id="search" placeholder="filter…"></div>
+    </div>
+    <div class="actions"><button class="btn btn-ghost" id="loadManageBtn">Load channels</button></div>
+    <p class="muted" id="manageCount" style="margin-top:12px"></p>
+    <div class="tblwrap"><table id="manageTable" style="display:none">
+      <thead><tr><th></th><th>Name</th><th>Group</th><th>URL</th><th></th></tr></thead>
+      <tbody></tbody>
+    </table></div>
+  </div>
+
+  <!-- NEW -->
+  <div class="card panel" id="p-new">
+    <h2>Create a new playlist</h2>
+    <p class="hint">Nayi category file banao (jaise <code>hindi-movies.m3u</code>).</p>
     <div class="row">
       <div><label>File name</label><input id="newfile" placeholder="hindi-movies.m3u"></div>
       <div><label>Group title</label><input id="newgroup" placeholder="Hindi Movies"></div>
     </div>
     <div class="actions"><button class="btn btn-ghost" id="createBtn">Create empty playlist</button></div>
   </div>
+
+  <div id="log"></div>
 </div>
 
 <script>
@@ -161,188 +190,269 @@
   const $ = id => document.getElementById(id);
   const API = "https://api.github.com";
   const PLACEHOLDER_SUFFIX = "/logo-placeholder.png";
-
   const cfg = { token:"", owner:"", repo:"", branch:"main" };
+  let manageEntries = [];
+  let manageFile = "";
 
-  function b64encodeUtf8(str){
-    const bytes = new TextEncoder().encode(str);
-    let bin = "";
-    bytes.forEach(b => bin += String.fromCharCode(b));
-    return btoa(bin);
-  }
-  function b64decodeUtf8(b64){
-    const bin = atob(b64.replace(/\s/g,""));
-    const bytes = new Uint8Array(bin.length);
-    for(let i=0;i<bin.length;i++) bytes[i]=bin.charCodeAt(i);
-    return new TextDecoder().decode(bytes);
-  }
+  /* ---------- helpers ---------- */
+  const b64enc = s => { const b=new TextEncoder().encode(s); let x=""; b.forEach(c=>x+=String.fromCharCode(c)); return btoa(x); };
+  const b64dec = s => { const bin=atob(s.replace(/\s/g,"")); const a=new Uint8Array(bin.length); for(let i=0;i<bin.length;i++)a[i]=bin.charCodeAt(i); return new TextDecoder().decode(a); };
+  const esc = s => (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+  function log(t,k){ const d=document.createElement("div"); d.className="msg "+(k||"info"); d.textContent=t; $("log").prepend(d); }
 
-  function log(text, kind){
-    const d = document.createElement("div");
-    d.className = "msg " + (kind||"info");
-    d.textContent = text;
-    $("log").prepend(d);
-  }
-
-  function loadCfg(){
-    try{
-      const s = JSON.parse(localStorage.getItem("iptv_cfg")||"{}");
-      if(s.token) cfg.token=s.token;
-      if(s.owner) cfg.owner=s.owner;
-      if(s.repo)  cfg.repo=s.repo;
-      if(s.branch)cfg.branch=s.branch;
-    }catch(e){}
-    $("token").value=cfg.token||""; $("owner").value=cfg.owner||"";
-    $("repo").value=cfg.repo||"";   $("branch").value=cfg.branch||"main";
-  }
-  function readForm(){
-    cfg.token=$("token").value.trim();
-    cfg.owner=$("owner").value.trim();
-    cfg.repo=$("repo").value.trim();
-    cfg.branch=($("branch").value.trim()||"main");
-  }
-  function saveCfg(){
-    readForm();
-    localStorage.setItem("iptv_cfg", JSON.stringify(cfg));
-    log("Settings saved.", "ok");
-  }
-
-  function headers(){
-    return {
-      "Authorization":"Bearer "+cfg.token,
-      "Accept":"application/vnd.github+json",
-      "X-GitHub-Api-Version":"2022-11-28"
-    };
-  }
-  function contentsUrl(path){
-    return API+"/repos/"+cfg.owner+"/"+cfg.repo+"/contents/"+encodeURIComponent(path).replace(/%2F/g,"/")+"?ref="+encodeURIComponent(cfg.branch);
-  }
-  function pagesUrl(){
-    return "https://"+cfg.owner+".github.io/"+cfg.repo;
-  }
+  const headers = () => ({"Authorization":"Bearer "+cfg.token,"Accept":"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"});
+  const cpath = p => encodeURIComponent(p).replace(/%2F/g,"/");
+  const pagesUrl = () => "https://"+cfg.owner+".github.io/"+cfg.repo;
+  async function errText(r){ let m=r.status+" "+r.statusText; try{const j=await r.json(); if(j.message)m+=" — "+j.message;}catch(e){} return m; }
 
   async function apiGet(path){
-    const r = await fetch(contentsUrl(path), {headers:headers()});
+    const r = await fetch(API+"/repos/"+cfg.owner+"/"+cfg.repo+"/contents/"+cpath(path)+"?ref="+encodeURIComponent(cfg.branch),{headers:headers()});
     if(r.status===404) return null;
     if(!r.ok) throw new Error(await errText(r));
     return r.json();
   }
-  async function errText(r){
-    let m = r.status+" "+r.statusText;
-    try{ const j = await r.json(); if(j.message) m += " — "+j.message; }catch(e){}
-    return m;
-  }
-  async function apiPut(path, contentB64, sha, message){
-    const body = { message, content:contentB64, branch:cfg.branch };
-    if(sha) body.sha = sha;
-    const r = await fetch(API+"/repos/"+cfg.owner+"/"+cfg.repo+"/contents/"+encodeURIComponent(path).replace(/%2F/g,"/"),
-      { method:"PUT", headers:Object.assign({"Content-Type":"application/json"},headers()), body:JSON.stringify(body) });
+  async function apiPut(path, b64, sha, message){
+    const body={message, content:b64, branch:cfg.branch}; if(sha) body.sha=sha;
+    const r = await fetch(API+"/repos/"+cfg.owner+"/"+cfg.repo+"/contents/"+cpath(path),
+      {method:"PUT",headers:Object.assign({"Content-Type":"application/json"},headers()),body:JSON.stringify(body)});
     if(!r.ok) throw new Error(await errText(r));
     return r.json();
   }
+  async function readFile(path){ const i=await apiGet(path); return i?{text:b64dec(i.content),sha:i.sha}:null; }
+  async function commitText(path,text,message,sha){ await apiPut(path,b64enc(text),sha,message); }
 
+  /* ---------- entries parse/serialize ---------- */
+  function parseEntries(text){
+    const lines = text.replace(/\r\n/g,"\n").split("\n");
+    const out=[]; let i=0;
+    while(i<lines.length){
+      const l=lines[i];
+      if(l.startsWith("#EXTINF")){ const u=lines[i+1]||""; out.push({extinf:l,url:u.startsWith("http")?u:""}); i+=2; }
+      else i++;
+    }
+    return out;
+  }
+  function serialize(entries){ return "#EXTM3U\n"+entries.map(e=>e.extinf+"\n"+e.url).join("\n")+"\n"; }
+  function attr(extinf,name){ const m=extinf.match(new RegExp(name+'="([^"]*)"')); return m?m[1]:""; }
+  function dispName(extinf){ const m=extinf.match(/,(.*)$/); return m?m[1].trim():""; }
+
+  /* ---------- config ---------- */
+  function loadCfg(){
+    try{ const s=JSON.parse(localStorage.getItem("iptv_cfg")||"{}");
+      cfg.token=s.token||""; cfg.owner=s.owner||""; cfg.repo=s.repo||""; cfg.branch=s.branch||"main"; }catch(e){}
+    $("token").value=cfg.token; $("owner").value=cfg.owner; $("repo").value=cfg.repo; $("branch").value=cfg.branch;
+  }
+  function readForm(){ cfg.token=$("token").value.trim(); cfg.owner=$("owner").value.trim(); cfg.repo=$("repo").value.trim(); cfg.branch=($("branch").value.trim()||"main"); }
+  function saveCfg(){ readForm(); localStorage.setItem("iptv_cfg",JSON.stringify(cfg)); log("Settings saved.","ok"); }
   async function testConnection(){
     readForm();
-    if(!cfg.token||!cfg.owner||!cfg.repo){ log("Token, owner aur repo bharo.", "warn"); return; }
+    if(!cfg.token||!cfg.owner||!cfg.repo){ log("Token, owner aur repo bharo.","warn"); return; }
     try{
-      const r = await fetch(API+"/repos/"+cfg.owner+"/"+cfg.repo, {headers:headers()});
+      const r=await fetch(API+"/repos/"+cfg.owner+"/"+cfg.repo,{headers:headers()});
       if(!r.ok) throw new Error(await errText(r));
-      const j = await r.json();
-      log("Connected: "+j.full_name+" ("+(j.private?"private":"public")+").", "ok");
-      loadPlaylists();
-    }catch(e){ log("Connection failed: "+e.message, "err"); }
+      const j=await r.json();
+      log("Connected: "+j.full_name,"ok"); loadPlaylists();
+    }catch(e){ log("Connection failed: "+e.message,"err"); }
   }
 
   async function loadPlaylists(){
-    readForm();
-    if(!cfg.token||!cfg.owner||!cfg.repo) return;
+    readForm(); if(!cfg.token||!cfg.owner||!cfg.repo) return;
     try{
-      const r = await fetch(API+"/repos/"+cfg.owner+"/"+cfg.repo+"/contents/?ref="+encodeURIComponent(cfg.branch), {headers:headers()});
+      const r=await fetch(API+"/repos/"+cfg.owner+"/"+cfg.repo+"/contents/?ref="+encodeURIComponent(cfg.branch),{headers:headers()});
       if(!r.ok) throw new Error(await errText(r));
-      const items = await r.json();
-      const files = items.filter(x=>x.type==="file" && x.name.toLowerCase().endsWith(".m3u")).map(x=>x.name).sort();
-      const sel = $("file");
-      const cur = sel.value;
-      sel.innerHTML = '<option value="">— select a playlist —</option>' + files.map(f=>'<option value="'+f+'">'+f+'</option>').join("");
-      if(cur) sel.value = cur;
-      log("Loaded "+files.length+" playlists.", "ok");
-      $("addBtn").disabled = false;
-    }catch(e){ log("Could not load playlists: "+e.message, "err"); }
+      const items=await r.json();
+      const files=items.filter(x=>x.type==="file"&&x.name.toLowerCase().endsWith(".m3u")).map(x=>x.name).sort();
+      const opts='<option value="">— select a playlist —</option>'+files.map(f=>'<option value="'+f+'">'+f+'</option>').join("");
+      document.querySelectorAll("select.fileSel").forEach(sel=>{ const cur=sel.value; sel.innerHTML=opts; if(cur)sel.value=cur; });
+      log("Loaded "+files.length+" playlists.","ok");
+      $("addBtn").disabled=false; $("bulkBtn").disabled=false;
+    }catch(e){ log("Could not load playlists: "+e.message,"err"); }
   }
 
-  function buildExtinf(){
-    const name = $("name").value.trim();
-    const url  = $("url").value.trim();
-    const grp  = $("group").value.trim() || "Other";
-    let logo   = $("logo").value.trim();
-    if(!logo) logo = pagesUrl()+PLACEHOLDER_SUFFIX;
-    const id = name.replace(/[^A-Za-z0-9]+/g,"") || "channel";
+  /* ---------- add one ---------- */
+  function buildExtinf(name,logo,grp){
+    if(!logo) logo=pagesUrl()+PLACEHOLDER_SUFFIX;
+    const id=name.replace(/[^A-Za-z0-9]+/g,"")||"channel";
     return '#EXTINF:-1 tvg-id="'+id+'" tvg-name="'+name+'" tvg-logo="'+logo+'" group-title="'+grp+'",'+name;
   }
   function refreshPreview(){
-    const name=$("name").value.trim(), url=$("url").value.trim();
-    $("preview").textContent = (name&&url) ? buildExtinf()+"\n"+url : "#EXTINF line preview…";
-    $("addBtn").disabled = !(name && url && $("file").value);
+    const n=$("name").value.trim(), u=$("url").value.trim();
+    $("preview").textContent=(n&&u)?buildExtinf(n,$("logo").value.trim(),$("group").value.trim()||"Other")+"\n"+u:"#EXTINF line preview…";
+    $("addBtn").disabled=!(n&&u&&$("file").value);
   }
-
-  async function addToFile(path, extinf, url, logPrefix){
-    const info = await apiGet(path);
-    if(!info) throw new Error(path+" repo me nahi mili");
-    const text = b64decodeUtf8(info.content);
-    let newText = text.replace(/\s*$/,"") + "\n" + extinf + "\n" + url + "\n";
-    await apiPut(path, b64encodeUtf8(newText), info.sha, "Add "+$("name").value.trim()+" to "+path);
-    log((logPrefix||"Added")+" → "+path, "ok");
+  async function appendTo(path, extinf, url, msg){
+    const f=await readFile(path); if(!f) throw new Error(path+" repo me nahi mili");
+    const entries=parseEntries(f.text); entries.push({extinf,url});
+    await commitText(path,serialize(entries),msg,f.sha);
   }
-
   async function addChannel(){
     readForm();
-    const file = $("file").value;
-    const url = $("url").value.trim();
-    if(!file || !$("name").value.trim() || !url){ log("Playlist, name aur URL zaroori hain.", "warn"); return; }
-    if(!/^https?:\/\//i.test(url)){ log("Stream URL http(s) se shuru hona chahiye.", "warn"); return; }
-    const extinf = buildExtinf();
-    $("addBtn").disabled = true;
+    const file=$("file").value, name=$("name").value.trim(), url=$("url").value.trim();
+    if(!file||!name||!url){ log("Playlist, name aur URL zaroori hain.","warn"); return; }
+    if(!/^https?:\/\//i.test(url)){ log("Stream URL http(s) se shuru hona chahiye.","warn"); return; }
+    const extinf=buildExtinf(name,$("logo").value.trim(),$("group").value.trim()||"Other");
     try{
-      await addToFile(file, extinf, url, "Added");
-      if($("alsoIndia").checked && file!=="india.m3u"){
-        await addToFile("india.m3u", extinf, url, "Also added");
-      }
-      log("Playlist URL: "+pagesUrl()+"/"+file, "info");
-      $("name").value=""; $("logo").value=""; $("url").value="";
-      refreshPreview();
-    }catch(e){ log("Failed: "+e.message, "err"); }
-    finally{ $("addBtn").disabled = !($("name").value.trim() && $("url").value.trim() && $("file").value); }
+      await appendTo(file,extinf,url,"Add "+name+" to "+file);
+      log("Added → "+file,"ok");
+      if($("alsoIndia").checked&&file!=="india.m3u"){ await appendTo("india.m3u",extinf,url,"Add "+name+" to india.m3u"); log("Also added → india.m3u","ok"); }
+      log("URL: "+pagesUrl()+"/"+file,"info");
+      $("name").value="";$("logo").value="";$("url").value="";refreshPreview();
+    }catch(e){ log("Failed: "+e.message,"err"); }
   }
 
+  /* ---------- bulk ---------- */
+  function parseBulk(text, defGrp){
+    const rows=[];
+    if(/#EXTINF/.test(text)){
+      const lines=text.replace(/\r\n/g,"\n").split("\n");
+      for(let i=0;i<lines.length;i++){
+        if(lines[i].startsWith("#EXTINF")){ const u=lines[i+1]||""; if(u.startsWith("http")){ rows.push({extinf:lines[i],url:u}); i++; } }
+      }
+      return rows;
+    }
+    text.split("\n").forEach(raw=>{
+      const line=raw.trim(); if(!line||line.startsWith("#")) return;
+      const parts=line.split("|").map(s=>s.trim());
+      let name,logo,url;
+      if(parts.length>=3){ name=parts[0]; logo=parts[1]; url=parts[2]; }
+      else if(parts.length===2){ name=parts[0]; url=parts[1]; }
+      else { name=line; url=line; }
+      if(!/^https?:\/\//i.test(url)) return;
+      rows.push({extinf:buildExtinf(name,logo,defGrp),url});
+    });
+    return rows;
+  }
+  async function bulkAdd(){
+    readForm();
+    const file=$("fileBulk").value, defGrp=$("groupBulk").value.trim()||"Other";
+    if(!file){ log("Playlist chuno.","warn"); return; }
+    const rows=parseBulk($("bulkText").value,defGrp);
+    if(!rows.length){ log("Koi valid channel nahi mila.","warn"); return; }
+    $("bulkBtn").disabled=true;
+    try{
+      const f=await readFile(file); if(!f) throw new Error(file+" repo me nahi mili");
+      const entries=parseEntries(f.text).concat(rows);
+      await commitText(file,serialize(entries),"Bulk add "+rows.length+" channels to "+file,f.sha);
+      log("Added "+rows.length+" channels → "+file,"ok");
+      if($("alsoIndiaBulk").checked&&file!=="india.m3u"){
+        const g=await readFile("india.m3u");
+        if(g){ const e2=parseEntries(g.text).concat(rows); await commitText("india.m3u",serialize(e2),"Bulk add "+rows.length+" to india.m3u",g.sha); log("Also added "+rows.length+" → india.m3u","ok"); }
+      }
+      $("bulkText").value="";
+    }catch(e){ log("Failed: "+e.message,"err"); }
+    finally{ $("bulkBtn").disabled=false; }
+  }
+
+  /* ---------- manage ---------- */
+  async function loadManage(){
+    readForm();
+    const file=$("fileManage").value; if(!file){ log("Playlist chuno.","warn"); return; }
+    try{
+      const f=await readFile(file); if(!f) throw new Error(file+" repo me nahi mili");
+      manageFile=file; manageEntries=parseEntries(f.text);
+      renderManage();
+      log("Loaded "+manageEntries.length+" channels from "+file,"ok");
+    }catch(e){ log("Failed: "+e.message,"err"); }
+  }
+  function renderManage(){
+    const q=$("search").value.trim().toLowerCase();
+    const tb=$("manageTable").querySelector("tbody"); tb.innerHTML="";
+    let shown=0;
+    manageEntries.forEach((e,idx)=>{
+      const nm=dispName(e.extinf), grp=attr(e.extinf,"group-title"), lg=attr(e.extinf,"tvg-logo");
+      if(q && !(nm.toLowerCase().includes(q)||e.url.toLowerCase().includes(q))) return;
+      shown++;
+      const tr=document.createElement("tr");
+      tr.innerHTML='<td><img class="logo" src="'+esc(lg)+'" loading="lazy" onerror="this.style.opacity=.25"></td>'+
+        '<td class="name">'+esc(nm)+'</td><td class="grp">'+esc(grp)+'</td>'+
+        '<td class="url" title="'+esc(e.url)+'">'+esc(e.url)+'</td>'+
+        '<td style="white-space:nowrap"><button class="btn btn-ghost btn-sm" data-act="edit" data-i="'+idx+'">Edit</button> '+
+        '<button class="btn btn-danger btn-sm" data-act="del" data-i="'+idx+'">Delete</button></td>';
+      tb.appendChild(tr);
+    });
+    $("manageTable").style.display = manageEntries.length?"table":"none";
+    $("manageCount").textContent = manageEntries.length ? ("Showing "+shown+" of "+manageEntries.length+" channels in "+manageFile) : "Is playlist me koi channel nahi mila.";
+  }
+  function editRow(idx){
+    const tb=$("manageTable").querySelector("tbody");
+    const trs=[...tb.querySelectorAll("tr")];
+    const target=[...trs].find(tr=>{const b=tr.querySelector('[data-i="'+idx+'"]');return b;});
+    if(!target) return;
+    const e=manageEntries[idx];
+    target.classList.add("editrow");
+    target.innerHTML='<td colspan="5">'+
+      '<input data-f="name" value="'+esc(dispName(e.extinf))+'" placeholder="Name">'+
+      '<div class="row" style="margin-top:6px"><input data-f="logo" value="'+esc(attr(e.extinf,"tvg-logo"))+'" placeholder="Logo URL">'+
+      '<input data-f="group" value="'+esc(attr(e.extinf,"group-title"))+'" placeholder="Group"></div>'+
+      '<input data-f="url" value="'+esc(e.url)+'" placeholder="Stream URL" style="margin-top:6px">'+
+      '<div class="actions" style="margin-top:10px"><button class="btn btn-primary btn-sm" data-act="save" data-i="'+idx+'">Save</button>'+
+      '<button class="btn btn-ghost btn-sm" data-act="cancel">Cancel</button></div></td>';
+  }
+  async function saveRow(idx){
+    const tb=$("manageTable").querySelector("tbody");
+    const row=[...tb.querySelectorAll("tr")].find(tr=>{const b=tr.querySelector('[data-act="save"]');return b&&b.getAttribute("data-i")==String(idx);});
+    if(!row) return;
+    const g=f=>row.querySelector('[data-f="'+f+'"]').value.trim();
+    const name=g("name"),logo=g("logo")||pagesUrl()+PLACEHOLDER_SUFFIX,grp=g("group")||"Other",url=g("url");
+    if(!name||!url) { log("Name aur URL zaroori hain.","warn"); return; }
+    manageEntries[idx]={extinf:buildExtinf(name,logo,grp),url};
+    try{
+      const f=await readFile(manageFile);
+      await commitText(manageFile,serialize(manageEntries),"Edit channel in "+manageFile,f.sha);
+      log("Updated entry in "+manageFile,"ok"); renderManage();
+    }catch(e){ log("Failed: "+e.message,"err"); }
+  }
+  async function delRow(idx){
+    const nm=dispName(manageEntries[idx].extinf);
+    if(!confirm("Delete '"+nm+"' from "+manageFile+"?")) return;
+    manageEntries.splice(idx,1);
+    try{
+      const f=await readFile(manageFile);
+      await commitText(manageFile,serialize(manageEntries),"Delete "+nm+" from "+manageFile,f.sha);
+      log("Deleted "+nm,"ok"); renderManage();
+    }catch(e){ log("Failed: "+e.message,"err"); }
+  }
+  $("manageTable").addEventListener("click",ev=>{
+    const b=ev.target.closest("button[data-act]"); if(!b) return;
+    const act=b.getAttribute("data-act"), i=parseInt(b.getAttribute("data-i"),10);
+    if(act==="edit") editRow(i);
+    else if(act==="save") saveRow(i);
+    else if(act==="del") delRow(i);
+    else if(act==="cancel") renderManage();
+  });
+  $("loadManageBtn").addEventListener("click", loadManage);
+  $("search").addEventListener("input", renderManage);
+
+  /* ---------- new playlist ---------- */
   async function createPlaylist(){
     readForm();
-    let f = $("newfile").value.trim();
-    if(!f) { log("File name bharo.", "warn"); return; }
-    if(!f.toLowerCase().endsWith(".m3u")) f += ".m3u";
-    const grp = $("newgroup").value.trim() || f.replace(/\.m3u$/i,"");
+    let f=$("newfile").value.trim(); if(!f){ log("File name bharo.","warn"); return; }
+    if(!f.toLowerCase().endsWith(".m3u")) f+=".m3u";
     try{
-      const existing = await apiGet(f);
-      if(existing){ log(f+" pehle se maujood hai.", "warn"); return; }
-      await apiPut(f, b64encodeUtf8("#EXTM3U\n"), null, "Create "+f);
-      log("Created "+f+" → "+pagesUrl()+"/"+f, "ok");
-      $("newfile").value=""; $("newgroup").value="";
-      loadPlaylists();
-    }catch(e){ log("Failed: "+e.message, "err"); }
+      if(await apiGet(f)){ log(f+" pehle se maujood hai.","warn"); return; }
+      await apiPut(f,b64enc("#EXTM3U\n"),null,"Create "+f);
+      log("Created "+f+" → "+pagesUrl()+"/"+f,"ok");
+      $("newfile").value=""; $("newgroup").value=""; loadPlaylists();
+    }catch(e){ log("Failed: "+e.message,"err"); }
   }
 
-  $("saveBtn").addEventListener("click", saveCfg);
-  $("testBtn").addEventListener("click", testConnection);
-  $("reloadBtn").addEventListener("click", loadPlaylists);
-  $("addBtn").addEventListener("click", addChannel);
-  $("createBtn").addEventListener("click", createPlaylist);
-  ["name","logo","url","group","file"].forEach(id=>{
-    $(id).addEventListener("input", refreshPreview);
-    $(id).addEventListener("change", refreshPreview);
-  });
+  /* ---------- tabs ---------- */
+  document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>{
+    document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+    document.querySelectorAll(".panel").forEach(x=>x.classList.remove("active"));
+    t.classList.add("active"); $("p-"+t.getAttribute("data-p")).classList.add("active");
+  }));
 
-  loadCfg();
-  refreshPreview();
-  if(cfg.token && cfg.owner && cfg.repo) loadPlaylists();
+  /* ---------- wire ---------- */
+  $("saveBtn").addEventListener("click",saveCfg);
+  $("testBtn").addEventListener("click",testConnection);
+  $("addBtn").addEventListener("click",addChannel);
+  $("bulkBtn").addEventListener("click",bulkAdd);
+  $("createBtn").addEventListener("click",createPlaylist);
+  ["name","logo","url","group","file"].forEach(id=>{ $(id).addEventListener("input",refreshPreview); $(id).addEventListener("change",refreshPreview); });
+
+  loadCfg(); refreshPreview();
+  if(cfg.token&&cfg.owner&&cfg.repo) loadPlaylists();
 })();
 </script>
 </body>

@@ -5,11 +5,17 @@ name, channel logo (`tvg-logo`) and stream URL in every entry.
 
 Base URL: https://project9793.github.io/hindi-tv/
 
-## Add channels yourself (web app)
+## Playlist Manager (web app)
 
-Open **[the Add Channel app](https://project9793.github.io/hindi-tv/add-channel.html)** — enter a channel's
-name, logo and stream URL, and it commits it straight into any playlist here.
-It needs a GitHub fine-grained token (Contents: Read and write) for this repo.
+Open **[the Playlist Manager](https://project9793.github.io/hindi-tv/add-channel.html)** to:
+
+- add a single channel (name + logo + stream URL),
+- **bulk add** many channels at once,
+- **view, edit and delete** channels in any playlist,
+- create new playlist files.
+
+It commits straight to this repo. Needs a GitHub fine-grained token
+(Contents: Read and write) for this repo.
 
 ## Playlists
 
