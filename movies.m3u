@@ -1,0 +1,7 @@
+#EXTM3U
+#EXTINF:-1 tvg-logo="" group-title="Movies",Sample Movies HD
+http://example.com/live/movies1/index.m3u8
+#EXTINF:-1 tvg-logo="" group-title="Movies",Classic Cinema
+http://example.com/live/movies2/index.m3u8
+#EXTINF:-1 tvg-logo="" group-title="Movies",Action Movies 24x7
+http://example.com/live/movies3/index.m3u8
