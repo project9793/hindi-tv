@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Channel — India IPTV Playlists</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Azeret+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f6f5f2;
+    --surface:#ffffff;
+    --surface-2:#f0efea;
+    --border:rgba(15,23,42,.10);
+    --text:#16212e;
+    --text-dim:#5c6b7a;
+    --accent:#0e7490;
+    --accent-strong:#0b5f76;
+    --accent-dim:#e2f1f5;
+    --ok:#15803d;
+    --ok-dim:#e4f3e8;
+    --warn:#b45309;
+    --warn-dim:#fbf0dd;
+    --err:#b91c1c;
+    --err-dim:#fbe6e6;
+    --radius:14px;
+    --font-body:'Plus Jakarta Sans',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    --font-mono:'Azeret Mono',ui-monospace,Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#10151c;
+      --surface:#182029;
+      --surface-2:#1f2934;
+      --border:rgba(255,255,255,.10);
+      --text:#e7edf3;
+      --text-dim:#9aa8b6;
+      --accent:#22a5c0;
+      --accent-strong:#4cc3dd;
+      --accent-dim:#12333d;
+      --ok:#4ade80; --ok-dim:#12301d;
+      --warn:#fbbf24; --warn-dim:#33280d;
+      --err:#f87171; --err-dim:#331616;
+    }
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;background:var(--bg);color:var(--text);font-family:var(--font-body);
+    line-height:1.55;-webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(60rem 30rem at 80% -10%, var(--accent-dim), transparent 70%);
+    background-repeat:no-repeat;
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:34px 20px 80px}
+  header{margin-bottom:26px}
+  .eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:8px}
+  .eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent)}
+  h1{font-size:clamp(26px,4vw,36px);margin:12px 0 6px;letter-spacing:-.02em;line-height:1.15}
+  header p{margin:0;color:var(--text-dim);max-width:60ch}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px;margin-bottom:18px;box-shadow:0 1px 2px rgba(15,23,42,.04)}
+  .card h2{font-size:16px;margin:0 0 4px;display:flex;align-items:center;gap:10px}
+  .num{font-family:var(--font-mono);font-size:12px;color:var(--accent);border:1px solid var(--border);border-radius:999px;padding:1px 9px}
+  .card .hint{color:var(--text-dim);font-size:13.5px;margin:0 0 16px}
+  label{display:block;font-size:13px;font-weight:600;margin:14px 0 6px}
+  label .opt{font-weight:400;color:var(--text-dim)}
+  input,select{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:var(--surface-2);color:var(--text);font-family:var(--font-body);font-size:14px}
+  input:focus,select:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:transparent}
+  input[type=password]{font-family:var(--font-mono);letter-spacing:.04em}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+  @media(max-width:600px){.row,.row3{grid-template-columns:1fr}}
+  .btn{appearance:none;border:1px solid transparent;border-radius:10px;padding:11px 18px;font-family:var(--font-body);font-weight:600;font-size:14px;cursor:pointer;transition:transform .06s ease,background .15s ease}
+  .btn:active{transform:translateY(1px)}
+  .btn-primary{background:var(--accent);color:#fff}
+  .btn-primary:hover{background:var(--accent-strong)}
+  .btn-primary:disabled{opacity:.5;cursor:not-allowed}
+  .btn-ghost{background:transparent;border-color:var(--border);color:var(--text)}
+  .btn-ghost:hover{background:var(--surface-2)}
+  .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+  .chk{display:flex;align-items:center;gap:9px;margin-top:14px;font-size:13.5px;font-weight:500}
+  .chk input{width:auto}
+  pre{background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:12px 14px;font-family:var(--font-mono);font-size:12.5px;overflow-x:auto;white-space:pre-wrap;word-break:break-all;margin:14px 0 0}
+  #log{margin-top:16px;display:flex;flex-direction:column;gap:8px}
+  .msg{font-size:13px;padding:9px 12px;border-radius:9px;border:1px solid var(--border);font-family:var(--font-mono)}
+  .msg.ok{background:var(--ok-dim);color:var(--ok);border-color:transparent}
+  .msg.err{background:var(--err-dim);color:var(--err);border-color:transparent}
+  .msg.info{background:var(--surface-2);color:var(--text-dim)}
+  .msg.warn{background:var(--warn-dim);color:var(--warn);border-color:transparent}
+  .note{font-size:12.5px;color:var(--text-dim);margin-top:12px;border-left:3px solid var(--border);padding-left:12px}
+  a{color:var(--accent)}
+  code{font-family:var(--font-mono);font-size:12.5px;background:var(--surface-2);padding:1px 5px;border-radius:5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Playlist Manager</div>
+    <h1>Add a channel to your GitHub playlist</h1>
+    <p>Naam, logo aur stream URL bharo — ye page seedha aapke GitHub repo ki <code>.m3u</code> file me channel add kar dega. Kuch install karne ki zaroorat nahi.</p>
+  </header>
+
+  <div class="card">
+    <h2><span class="num">1</span> GitHub connection</h2>
+    <p class="hint">Ek <b>fine-grained personal access token</b> banao jisme sirf is repo ke liye <b>Contents: Read and write</b> permission ho.</p>
+    <label>Personal access token</label>
+    <input id="token" type="password" placeholder="github_pat_..." autocomplete="off" spellcheck="false">
+    <div class="row3" style="margin-top:6px">
+      <div><label>Owner (username)</label><input id="owner" placeholder="project9793"></div>
+      <div><label>Repository</label><input id="repo" placeholder="hindi-tv"></div>
+      <div><label>Branch</label><input id="branch" placeholder="main"></div>
+    </div>
+    <div class="actions">
+      <button class="btn btn-primary" id="saveBtn">Save</button>
+      <button class="btn btn-ghost" id="testBtn">Test connection</button>
+    </div>
+    <p class="note">Token sirf aapke browser me (localStorage) save hota hai aur kisi aur jagah nahi jata — sirf GitHub API ko bheja jata hai. Public/shared computer pe use na karo.</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="num">2</span> New channel</h2>
+    <p class="hint">Pehle connection save karo, phir playlist list load hogi.</p>
+    <div class="row">
+      <div>
+        <label>Playlist file</label>
+        <select id="file"><option value="">— load playlists first —</option></select>
+      </div>
+      <div>
+        <label>Group / category <span class="opt">(optional)</span></label>
+        <input id="group" placeholder="e.g. Movies">
+      </div>
+    </div>
+    <label>Channel name</label>
+    <input id="name" placeholder="e.g. Star Gold HD">
+    <label>Logo URL <span class="opt">(optional — khaali chhodo to placeholder lag jayega)</span></label>
+    <input id="logo" placeholder="https://.../logo.png">
+    <label>Stream URL</label>
+    <input id="url" placeholder="https://.../index.m3u8">
+    <div class="chk"><input type="checkbox" id="alsoIndia"><label for="alsoIndia" style="margin:0;font-weight:500">Ise <code>india.m3u</code> (combined) me bhi add karo</label></div>
+
+    <pre id="preview">#EXTINF line preview…</pre>
+    <div class="actions">
+      <button class="btn btn-primary" id="addBtn" disabled>Add channel</button>
+      <button class="btn btn-ghost" id="reloadBtn">Reload playlists</button>
+    </div>
+    <div id="log"></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="num">3</span> Naya playlist banao <span class="opt" style="font-weight:400;color:var(--text-dim);font-size:13px">(optional)</span></h2>
+    <p class="hint">Agar aap ek nayi category file banana chahte ho (jaise <code>hindi-movies.m3u</code>), uska naam daalo.</p>
+    <div class="row">
+      <div><label>File name</label><input id="newfile" placeholder="hindi-movies.m3u"></div>
+      <div><label>Group title</label><input id="newgroup" placeholder="Hindi Movies"></div>
+    </div>
+    <div class="actions"><button class="btn btn-ghost" id="createBtn">Create empty playlist</button></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+  const API = "https://api.github.com";
+  const PLACEHOLDER_SUFFIX = "/logo-placeholder.png";
+
+  const cfg = { token:"", owner:"", repo:"", branch:"main" };
+
+  function b64encodeUtf8(str){
+    const bytes = new TextEncoder().encode(str);
+    let bin = "";
+    bytes.forEach(b => bin += String.fromCharCode(b));
+    return btoa(bin);
+  }
+  function b64decodeUtf8(b64){
+    const bin = atob(b64.replace(/\s/g,""));
+    const bytes = new Uint8Array(bin.length);
+    for(let i=0;i<bin.length;i++) bytes[i]=bin.charCodeAt(i);
+    return new TextDecoder().decode(bytes);
+  }
+
+  function log(text, kind){
+    const d = document.createElement("div");
+    d.className = "msg " + (kind||"info");
+    d.textContent = text;
+    $("log").prepend(d);
+  }
+
+  function loadCfg(){
+    try{
+      const s = JSON.parse(localStorage.getItem("iptv_cfg")||"{}");
+      if(s.token) cfg.token=s.token;
+      if(s.owner) cfg.owner=s.owner;
+      if(s.repo)  cfg.repo=s.repo;
+      if(s.branch)cfg.branch=s.branch;
+    }catch(e){}
+    $("token").value=cfg.token||""; $("owner").value=cfg.owner||"";
+    $("repo").value=cfg.repo||"";   $("branch").value=cfg.branch||"main";
+  }
+  function readForm(){
+    cfg.token=$("token").value.trim();
+    cfg.owner=$("owner").value.trim();
+    cfg.repo=$("repo").value.trim();
+    cfg.branch=($("branch").value.trim()||"main");
+  }
+  function saveCfg(){
+    readForm();
+    localStorage.setItem("iptv_cfg", JSON.stringify(cfg));
+    log("Settings saved.", "ok");
+  }
+
+  function headers(){
+    return {
+      "Authorization":"Bearer "+cfg.token,
+      "Accept":"application/vnd.github+json",
+      "X-GitHub-Api-Version":"2022-11-28"
+    };
+  }
+  function contentsUrl(path){
+    return API+"/repos/"+cfg.owner+"/"+cfg.repo+"/contents/"+encodeURIComponent(path).replace(/%2F/g,"/")+"?ref="+encodeURIComponent(cfg.branch);
+  }
+  function pagesUrl(){
+    return "https://"+cfg.owner+".github.io/"+cfg.repo;
+  }
+
+  async function apiGet(path){
+    const r = await fetch(contentsUrl(path), {headers:headers()});
+    if(r.status===404) return null;
+    if(!r.ok) throw new Error(await errText(r));
+    return r.json();
+  }
+  async function errText(r){
+    let m = r.status+" "+r.statusText;
+    try{ const j = await r.json(); if(j.message) m += " — "+j.message; }catch(e){}
+    return m;
+  }
+  async function apiPut(path, contentB64, sha, message){
+    const body = { message, content:contentB64, branch:cfg.branch };
+    if(sha) body.sha = sha;
+    const r = await fetch(API+"/repos/"+cfg.owner+"/"+cfg.repo+"/contents/"+encodeURIComponent(path).replace(/%2F/g,"/"),
+      { method:"PUT", headers:Object.assign({"Content-Type":"application/json"},headers()), body:JSON.stringify(body) });
+    if(!r.ok) throw new Error(await errText(r));
+    return r.json();
+  }
+
+  async function testConnection(){
+    readForm();
+    if(!cfg.token||!cfg.owner||!cfg.repo){ log("Token, owner aur repo bharo.", "warn"); return; }
+    try{
+      const r = await fetch(API+"/repos/"+cfg.owner+"/"+cfg.repo, {headers:headers()});
+      if(!r.ok) throw new Error(await errText(r));
+      const j = await r.json();
+      log("Connected: "+j.full_name+" ("+(j.private?"private":"public")+").", "ok");
+      loadPlaylists();
+    }catch(e){ log("Connection failed: "+e.message, "err"); }
+  }
+
+  async function loadPlaylists(){
+    readForm();
+    if(!cfg.token||!cfg.owner||!cfg.repo) return;
+    try{
+      const r = await fetch(API+"/repos/"+cfg.owner+"/"+cfg.repo+"/contents/?ref="+encodeURIComponent(cfg.branch), {headers:headers()});
+      if(!r.ok) throw new Error(await errText(r));
+      const items = await r.json();
+      const files = items.filter(x=>x.type==="file" && x.name.toLowerCase().endsWith(".m3u")).map(x=>x.name).sort();
+      const sel = $("file");
+      const cur = sel.value;
+      sel.innerHTML = '<option value="">— select a playlist —</option>' + files.map(f=>'<option value="'+f+'">'+f+'</option>').join("");
+      if(cur) sel.value = cur;
+      log("Loaded "+files.length+" playlists.", "ok");
+      $("addBtn").disabled = false;
+    }catch(e){ log("Could not load playlists: "+e.message, "err"); }
+  }
+
+  function buildExtinf(){
+    const name = $("name").value.trim();
+    const url  = $("url").value.trim();
+    const grp  = $("group").value.trim() || "Other";
+    let logo   = $("logo").value.trim();
+    if(!logo) logo = pagesUrl()+PLACEHOLDER_SUFFIX;
+    const id = name.replace(/[^A-Za-z0-9]+/g,"") || "channel";
+    return '#EXTINF:-1 tvg-id="'+id+'" tvg-name="'+name+'" tvg-logo="'+logo+'" group-title="'+grp+'",'+name;
+  }
+  function refreshPreview(){
+    const name=$("name").value.trim(), url=$("url").value.trim();
+    $("preview").textContent = (name&&url) ? buildExtinf()+"\n"+url : "#EXTINF line preview…";
+    $("addBtn").disabled = !(name && url && $("file").value);
+  }
+
+  async function addToFile(path, extinf, url, logPrefix){
+    const info = await apiGet(path);
+    if(!info) throw new Error(path+" repo me nahi mili");
+    const text = b64decodeUtf8(info.content);
+    let newText = text.replace(/\s*$/,"") + "\n" + extinf + "\n" + url + "\n";
+    await apiPut(path, b64encodeUtf8(newText), info.sha, "Add "+$("name").value.trim()+" to "+path);
+    log((logPrefix||"Added")+" → "+path, "ok");
+  }
+
+  async function addChannel(){
+    readForm();
+    const file = $("file").value;
+    const url = $("url").value.trim();
+    if(!file || !$("name").value.trim() || !url){ log("Playlist, name aur URL zaroori hain.", "warn"); return; }
+    if(!/^https?:\/\//i.test(url)){ log("Stream URL http(s) se shuru hona chahiye.", "warn"); return; }
+    const extinf = buildExtinf();
+    $("addBtn").disabled = true;
+    try{
+      await addToFile(file, extinf, url, "Added");
+      if($("alsoIndia").checked && file!=="india.m3u"){
+        await addToFile("india.m3u", extinf, url, "Also added");
+      }
+      log("Playlist URL: "+pagesUrl()+"/"+file, "info");
+      $("name").value=""; $("logo").value=""; $("url").value="";
+      refreshPreview();
+    }catch(e){ log("Failed: "+e.message, "err"); }
+    finally{ $("addBtn").disabled = !($("name").value.trim() && $("url").value.trim() && $("file").value); }
+  }
+
+  async function createPlaylist(){
+    readForm();
+    let f = $("newfile").value.trim();
+    if(!f) { log("File name bharo.", "warn"); return; }
+    if(!f.toLowerCase().endsWith(".m3u")) f += ".m3u";
+    const grp = $("newgroup").value.trim() || f.replace(/\.m3u$/i,"");
+    try{
+      const existing = await apiGet(f);
+      if(existing){ log(f+" pehle se maujood hai.", "warn"); return; }
+      await apiPut(f, b64encodeUtf8("#EXTM3U\n"), null, "Create "+f);
+      log("Created "+f+" → "+pagesUrl()+"/"+f, "ok");
+      $("newfile").value=""; $("newgroup").value="";
+      loadPlaylists();
+    }catch(e){ log("Failed: "+e.message, "err"); }
+  }
+
+  $("saveBtn").addEventListener("click", saveCfg);
+  $("testBtn").addEventListener("click", testConnection);
+  $("reloadBtn").addEventListener("click", loadPlaylists);
+  $("addBtn").addEventListener("click", addChannel);
+  $("createBtn").addEventListener("click", createPlaylist);
+  ["name","logo","url","group","file"].forEach(id=>{
+    $(id).addEventListener("input", refreshPreview);
+    $(id).addEventListener("change", refreshPreview);
+  });
+
+  loadCfg();
+  refreshPreview();
+  if(cfg.token && cfg.owner && cfg.repo) loadPlaylists();
+})();
+</script>
+</body>
+</html>

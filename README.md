@@ -1,11 +1,15 @@
 # India IPTV Playlists
 
-Category-wise IPTV playlists containing **only Indian channels**, with
-channel name, channel logo (`tvg-logo`) and stream URL in every entry.
-
-Generated from the [iptv-org](https://github.com/iptv-org) public database.
+Category-wise IPTV playlists with **only Indian channels**, with channel
+name, channel logo (`tvg-logo`) and stream URL in every entry.
 
 Base URL: https://project9793.github.io/hindi-tv/
+
+## Add channels yourself (web app)
+
+Open **[the Add Channel app](https://project9793.github.io/hindi-tv/add-channel.html)** — enter a channel's
+name, logo and stream URL, and it commits it straight into any playlist here.
+It needs a GitHub fine-grained token (Contents: Read and write) for this repo.
 
 ## Playlists
 
@@ -35,16 +39,9 @@ Base URL: https://project9793.github.io/hindi-tv/
 | Outdoor | 2 | https://project9793.github.io/hindi-tv/outdoor.m3u |
 | Science | 1 | https://project9793.github.io/hindi-tv/science.m3u |
 
-## How to use
-
-Open your IPTV player (VLC, Tivimate, OTT Navigator, IPTV Smarters, etc.),
-add a new M3U playlist, and paste the URL of the category you want.
-
 ## Checking which streams are working
 
-The streams come from the iptv-org database, which keeps only streams that
-pass its automated availability checks. If you still want to verify from your
-own network, run the included `check_streams.py`:
+Run the included `check_streams.py` on your own network:
 
 ```
 python3 check_streams.py movies.m3u movies-working.m3u
@@ -52,5 +49,5 @@ python3 check_streams.py movies.m3u movies-working.m3u
 
 ## Note
 
-These are publicly listed streams from the iptv-org database. Availability and
-legality vary by broadcaster - use only streams you are allowed to access.
+Streams come from the iptv-org public database. Availability and legality vary
+by broadcaster - use only streams you are allowed to access.
