@@ -1,0 +1,121 @@
+#EXTM3U
+#EXTINF:-1 tvg-id="CCV.in@SD",CCV (480p)
+https://5a1178b42cc03.streamlock.net/8212/8212/playlist.m3u8
+#EXTINF:-1 tvg-id="ColorsRishteyAmericas.in@SD",Colors Rishtey Americas (396p)
+https://manatv.akamaized.net/090823/smil:ristheyamerica.smil/playlist.m3u8
+#EXTINF:-1 tvg-id="DangalTV.in@SD",Dangal TV (720p)
+https://live-dangal.akamaized.net/liveabr/playlist.m3u8
+#EXTINF:-1 tvg-id="DangalTV.in@SD",Dangal TV (576p)
+https://streams.tangotv.in/DANGAL/ORIGIN/index.m3u8
+#EXTINF:-1 tvg-id="DangalTV.in@SD",Dangal TV (576p)
+https://tvsen3.aynaott.com/qPNg4LJK/index.m3u8
+#EXTINF:-1 tvg-id="DangalTV.in@SD",Dangal TV (576p)
+http://107.167.16.138/dangal/index.m3u8?token=test
+#EXTINF:-1 tvg-id="DangalTV.in@SD",Dangal TV (576p)
+https://mumt04.tangotv.in/m18aqlK4DANGAL/index.m3u8
+#EXTINF:-1 tvg-id="DangalTV.in@SD",Dangal TV (576p)
+https://cdn.pishow.tv/ott/live/1141/master.m3u8
+#EXTINF:-1 tvg-id="DDArunPrabha.in@SD",DD Arun Prabha
+https://cdn.pishow.tv/ott/live/32/master.m3u8
+#EXTINF:-1 tvg-id="DDBangla.in@SD",DD Bangla
+https://cdn.pishow.tv/ott/live/37/master.m3u8
+#EXTINF:-1 tvg-id="DDBihar.in@SD",DD Bihar (576p)
+https://mumbai-edge.smartplaytv.in/ddbihar/index.m3u8
+#EXTINF:-1 tvg-id="DDChandana.in@SD",DD Chandana
+https://cdn.pishow.tv/ott/live/28/master.m3u8
+#EXTINF:-1 tvg-id="DDIndia.in@SD",DD India (720p)
+https://d2gvyg6lvauoko.cloudfront.net/230226/ddindia/chunks.m3u8
+#EXTINF:-1 tvg-id="DDIndia.in@SD",DD India (576p)
+https://mumt05.tangotv.in/87NeALx2DDINDIA/index.m3u8
+#EXTINF:-1 tvg-id="DDIndia.in@SD",DD India (720p)
+https://d2gvyg6lvauoko.cloudfront.net/230226/ddindia/playlist.m3u8?hdnts=st=1735898689~exp=1835898688~acl=*~hmac=f5fe24724fe05481e3841f9eb5ab8efdee0a3dd83645ae9dcf45703f525bab7b
+#EXTINF:-1 tvg-id="DDIndia.in@SD",DD India (1080p)
+https://mumbai-edge.smartplaytv.in/DDIndia/index.m3u8
+#EXTINF:-1 tvg-id="DDJharkhand.in@SD",DD Jharkhand
+https://cdn.pishow.tv/ott/live/1617/master.m3u8
+#EXTINF:-1 tvg-id="DDKashir.in@SD",DD Kashir
+https://cdn.pishow.tv/ott/live/16/master.m3u8
+#EXTINF:-1 tvg-id="DDMadhyaPradesh.in@SD",DD Madhya Pradesh (720p)
+https://mumbai-edge.smartplaytv.in/ddmadhyapradesh/index.m3u8
+#EXTINF:-1 tvg-id="DDOdia.in@SD",DD Odia (576p)
+https://mumbai-edge.smartplaytv.in/ddodiya/index.m3u8
+#EXTINF:-1 tvg-id="DDRajasthan.in@SD",DD Rajasthan (576p)
+https://mumbai-edge.smartplaytv.in/ddrajasthan/index.m3u8
+#EXTINF:-1 tvg-id="DDTamil.in@HD",DD Tamil HD (1080p)
+https://cdn.pishow.tv/ott/live/1737/master.m3u8
+#EXTINF:-1 tvg-id="DDUrdu.in@SD",DD Urdu (576p)
+https://mumbai-edge.smartplaytv.in/DDUrdu/index.m3u8
+#EXTINF:-1 tvg-id="JanTV.in@SD",Jan TV (576p)
+https://d1msejlow1t3l4.cloudfront.net/fta/jantv/playlist.m3u8
+#EXTINF:-1 tvg-id="JeevanTV.in@SD",Jeevan TV (576p)
+https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/in/YuppTV/JeevanTV.m3u8
+#EXTINF:-1 tvg-id="Jonack.in@SD",Jonack (576p)
+https://cdn.pishow.tv/ott/live/10006/master.m3u8
+#EXTINF:-1 tvg-id="Jonack.in@SD",Jonack TV (360p) [Not 24/7]
+https://cdn.smartstream.video/smartstream-us/jonakk/jonakk/playlist.m3u8
+#EXTINF:-1 tvg-id="KairaliArabia.in@SD",Kairali Arabia (576p)
+https://mumt03.tangotv.in/Dsly5z3HKAIRALIARABIA/index.m3u8
+#EXTINF:-1 tvg-id="KairaliTV.in@SD",Kairali TV (576p)
+https://mumt01.tangotv.in/O5aw8Zn3KAIRALI/index.m3u8
+#EXTINF:-1 tvg-id="KairaliTV.in@SD",Kairali TV (576p)
+https://streams.tangotv.in/KAIRALI/ORIGIN/index.m3u8
+#EXTINF:-1 tvg-id="KalaignarTV.in@SD",Kalaignar TV (396p)
+https://segment.yuppcdn.net/240122/kalaignartv/playlist.m3u8
+#EXTINF:-1 tvg-id="KaumudyTV.in@SD",Kaumudy TV (720p)
+https://oqgdrkxby4rm-hls-live.5centscdn.com/kaumudytv/live.stream/playlist.m3u8
+#EXTINF:-1 tvg-id="KaumudyTV.in@SD",Kaumudy TV
+https://cdn.pishow.tv/ott/live/1237/master.m3u8
+#EXTINF:-1 tvg-id="KTVBangla.in@SD",KTV Bangla (720p)
+https://server.livelegitpro.in:9899/tribetv/tribetv/index.m3u8
+#EXTINF:-1 tvg-id="MakkalTV.in@SD",Makkal TV (576i)
+https://5k8q87azdy4v-hls-live.wmncdn.net/MAKKAL/271ddf829afeece44d8732757fba1a66.sdp/playlist.m3u8
+#EXTINF:-1 tvg-id="MakkalTV.in@SD",Makkal TV (576p)
+https://mumbai-edge.smartplaytv.in/MakkalTV/index.m3u8
+#EXTINF:-1 tvg-id="MakkalTV.in@SD",Makkal TV (576p)
+https://mumt01.tangotv.in/O5aw8Zn3MAKKALTV/index.m3u8
+#EXTINF:-1 tvg-id="MBCTV.in@SD",MBC TV (576p)
+https://mumbai-edge.smartplaytv.in/MBCTV/index.m3u8
+#EXTINF:-1 tvg-id="MBCTV.in@SD",MBC TV (576p)
+https://cdn.pishow.tv/ott/live/1017/master.m3u8
+#EXTINF:-1 tvg-id="MeiAlaiTV.in@SD",Mei Alai TV (576p)
+https://meialai.iptelevishion.com/meialai/2/index.m3u8
+#EXTINF:-1 tvg-id="MetroTV.in@SD",Metro TV (1080p)
+https://mercury.streambridge.link:8042/telugu/metrotv/index.m3u8
+#EXTINF:-1 tvg-id="Mh1Prime.in@SD",Mh 1 Prime (576p)
+https://streams.tangotv.in/MHONE/ORIGIN/index.m3u8
+#EXTINF:-1 tvg-id="Mh1Prime.in@SD",Mh 1 Prime (576p)
+https://mumt04.tangotv.in/m18aqlK4MHONE/index.m3u8
+#EXTINF:-1 tvg-id="NandighoshaTV.in@SD",Nandighosha TV (576p)
+https://mumt05.tangotv.in/87NeALx2NANDIGHOSHATV/index.m3u8
+#EXTINF:-1 tvg-id="Network10.in@SD",Network 10
+https://network10.livebox.co.in/network10hls/live.m3u8
+#EXTINF:-1 tvg-id="Network10.in@SD",Network 10 (576p)
+https://mumt01.tangotv.in/O5aw8Zn3NETWORK10/index.m3u8
+#EXTINF:-1 tvg-id="Network10.in@SD",Network 10 (576p)
+https://tvsen6.aynaott.com/3Cb2WLFz/index.m3u8
+#EXTINF:-1 tvg-id="Network10.in@SD",Network 10 (576p)
+https://d1msejlow1t3l4.cloudfront.net/fta/network10/playlist.m3u8
+#EXTINF:-1 tvg-id="Network10.in@SD",Network 10 (720p)
+https://mumbai-edge.smartplaytv.in/Network10/index.m3u8
+#EXTINF:-1 tvg-id="News11.in@SD",News 11 (396p)
+https://d1msejlow1t3l4.cloudfront.net/fta/news11bharat/playlist.m3u8
+#EXTINF:-1 tvg-id="News11.in@SD",News 11 (576p)
+https://mumt07.tangotv.in/zHjX9OFlNEWS11BHARAT/index.m3u8
+#EXTINF:-1 tvg-id="News11.in@SD",News 11 (576p)
+https://live1.ottlive.co.in/news11/news11/index.m3u8
+#EXTINF:-1 tvg-id="NKRTVKannada.in@SD",NKR TV Kannada (1080p)
+https://stream.ottlive.co.in/nkrtv/index.m3u8
+#EXTINF:-1 tvg-id="NKRTVKannada.in@SD",NKR TV Kannada (576p)
+https://mumt05.tangotv.in/87NeALx2NKRTV/index.m3u8
+#EXTINF:-1 tvg-id="Starnet.in@SD",Starnet (480p)
+https://5a1178b42cc03.streamlock.net/8220/8220/playlist.m3u8
+#EXTINF:-1 tvg-id="SunGemini.in@SD",Sun Gemini (576p)
+http://ptuf.ridsys.in/riptv/live/GEMINI_TV/index.m3u8
+#EXTINF:-1 tvg-id="UTVPalakkad.in@SD",UTV Palakkad (1080p)
+https://em4qj6nedyvg-hls-live.wmncdn.net/liveunit/89b1e919eed04e59383cf820d644c20e.sdp/playlist.m3u8
+#EXTINF:-1 tvg-id="UTVPalakkad.in@SD",UTV Palakkad (1080p)
+https://em4qj6nedyvg-hls-live.wmncdn.net/utv/ab2de115318ae40bdd434e193a2f2e7f.sdp/playlist.m3u8
+#EXTINF:-1 tvg-id="VCV.in@SD",VCV (720p) [Not 24/7]
+https://5a1178b42cc03.streamlock.net/8210/8210/playlist.m3u8
+#EXTINF:-1 tvg-id="Vision.in@SD",Vision (576p)
+http://103.85.204.205:1935/VISIONMEDIA/live/playlist.m3u8

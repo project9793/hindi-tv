@@ -1,0 +1,5 @@
+#EXTM3U
+#EXTINF:-1 tvg-id="DDKisan.in@SD",DD Kisan (1080p)
+https://mumbai-edge.smartplaytv.in/DDKisan/index.m3u8
+#EXTINF:-1 tvg-id="DDKisan.in@SD",DD Kisan (576p)
+https://cdn.pishow.tv/ott/live/223/master.m3u8

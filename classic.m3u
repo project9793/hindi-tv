@@ -1,0 +1,7 @@
+#EXTM3U
+#EXTINF:-1 tvg-id="ZeeCineClassic.in@SD",Zee Cine Classic (1080p)
+https://amg00862-amg00862c8-amgplt0173.playout.now3.amagi.tv/playlist/amg00862-amg00862c8-amgplt0173/playlist.m3u8
+#EXTINF:-1 tvg-id="ZeeClassic.in@SD",Zee Classic (576p)
+http://107.167.16.138/zeeclassic/index.m3u8?token=test
+#EXTINF:-1 tvg-id="ZillarBartaNews.in@HD",ZillarBarta News
+https://server.zillarbarta.com/zillarbarta/index.m3u8
