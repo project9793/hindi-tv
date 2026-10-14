@@ -103,12 +103,21 @@
   <div class="card">
     <h2><span class="num">1</span> GitHub connection</h2>
     <p class="hint">Fine-grained token banao jisme is repo ke liye <b>Contents: Read and write</b> ho.</p>
+    <details class="note" style="margin:0 0 16px">
+      <summary style="cursor:pointer;font-weight:600;color:var(--text)">Token kaise banayein (4 steps)</summary>
+      <ol style="margin:10px 0 0;padding-left:20px;font-size:13px;color:var(--text-dim);line-height:1.7">
+        <li><a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com/settings/personal-access-tokens/new</a> kholo &rarr; <b>Generate new token</b></li>
+        <li>Repository access &rarr; <b>Only select repositories</b> &rarr; <code>project9793/hindi-tv</code> chuno</li>
+        <li>Permissions &rarr; Repository permissions &rarr; <b>Contents = Read and write</b></li>
+        <li>Generate &rarr; token copy karo, neeche paste karo</li>
+      </ol>
+    </details>
     <label>Personal access token</label>
     <input id="token" type="password" placeholder="github_pat_..." autocomplete="off" spellcheck="false">
     <div class="row3" style="margin-top:6px">
-      <div><label>Owner</label><input id="owner" placeholder="project9793"></div>
-      <div><label>Repository</label><input id="repo" placeholder="hindi-tv"></div>
-      <div><label>Branch</label><input id="branch" placeholder="main"></div>
+      <div><label>Owner</label><input id="owner" value="project9793" placeholder="project9793"></div>
+      <div><label>Repository</label><input id="repo" value="hindi-tv" placeholder="hindi-tv"></div>
+      <div><label>Branch</label><input id="branch" value="main" placeholder="main"></div>
     </div>
     <div class="actions">
       <button class="btn btn-primary" id="saveBtn">Save</button>
@@ -240,7 +249,10 @@ Zee Cinema | https://.../logo.png | https://.../index.m3u8"></textarea>
   function loadCfg(){
     try{ const s=JSON.parse(localStorage.getItem("iptv_cfg")||"{}");
       cfg.token=s.token||""; cfg.owner=s.owner||""; cfg.repo=s.repo||""; cfg.branch=s.branch||"main"; }catch(e){}
-    $("token").value=cfg.token; $("owner").value=cfg.owner; $("repo").value=cfg.repo; $("branch").value=cfg.branch;
+    $("token").value=cfg.token;
+    $("owner").value=cfg.owner||"project9793";
+    $("repo").value=cfg.repo||"hindi-tv";
+    $("branch").value=cfg.branch||"main";
   }
   function readForm(){ cfg.token=$("token").value.trim(); cfg.owner=$("owner").value.trim(); cfg.repo=$("repo").value.trim(); cfg.branch=($("branch").value.trim()||"main"); }
   function saveCfg(){ readForm(); localStorage.setItem("iptv_cfg",JSON.stringify(cfg)); log("Settings saved.","ok"); }
