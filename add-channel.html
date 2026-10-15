@@ -132,6 +132,7 @@
     <button class="tab" data-p="bulk">Bulk add</button>
     <button class="tab" data-p="manage">Manage</button>
     <button class="tab" data-p="new">New playlist</button>
+    <button class="tab" data-p="upload">Upload file</button>
   </div>
 
   <!-- ADD ONE -->
@@ -190,6 +191,28 @@ Zee Cinema | https://.../logo.png | https://.../index.m3u8"></textarea>
       <div><label>Group title</label><input id="newgroup" placeholder="Hindi Movies"></div>
     </div>
     <div class="actions"><button class="btn btn-ghost" id="createBtn">Create empty playlist</button></div>
+  </div>
+
+  <!-- UPLOAD FILE -->
+  <div class="card panel" id="p-upload">
+    <h2>Upload a file to a repo</h2>
+    <p class="hint">Apne phone/computer se koi file (jaise <code>index.html</code>) chuno aur seedha GitHub repo me commit karo &mdash; GitHub kholne ki zaroorat nahi. Agar file pehle se hai to wo replace ho jayegi.</p>
+    <div class="row3">
+      <div><label>Owner</label><input id="upOwner" value="project9793" list="repoList" placeholder="project9793"></div>
+      <div><label>Repository</label><input id="upRepo" value="hindi-tv" list="repoList" placeholder="hindi-tv"></div>
+      <div><label>Path in repo</label><input id="upPath" value="index.html" placeholder="index.html"></div>
+    </div>
+    <datalist id="repoList">
+      <option value="hindi-tv"></option>
+      <option value="pluto-iptv"></option>
+      <option value="Pluto"></option>
+      <option value="Pluto_Cam"></option>
+      <option value="rail-Alert"></option>
+    </datalist>
+    <label>File</label>
+    <input type="file" id="upFile">
+    <p class="muted" id="upInfo" style="margin-top:8px"></p>
+    <div class="actions"><button class="btn btn-primary" id="upBtn">Upload to GitHub</button></div>
   </div>
 
   <div id="log"></div>
@@ -464,6 +487,46 @@ Zee Cinema | https://.../logo.png | https://.../index.m3u8"></textarea>
     }catch(e){ log("Failed: "+e.message,"err"); }
   }
 
+  /* ---------- upload file ---------- */
+  async function fileToB64(file){
+    const buf = await file.arrayBuffer();
+    const bytes = new Uint8Array(buf);
+    let bin = "";
+    const chunk = 0x8000;
+    for(let i=0;i<bytes.length;i+=chunk){ bin += String.fromCharCode.apply(null, bytes.subarray(i,i+chunk)); }
+    return btoa(bin);
+  }
+  async function apiGetRepo(owner,repo,path){
+    const r = await fetch(API+"/repos/"+owner+"/"+repo+"/contents/"+cpath(path)+"?ref="+encodeURIComponent(cfg.branch),{headers:headers()});
+    if(r.status===404) return null;
+    if(!r.ok) throw new Error(await errText(r));
+    return r.json();
+  }
+  async function apiPutRepo(owner,repo,path,b64,sha,message){
+    const body={message,content:b64,branch:cfg.branch}; if(sha) body.sha=sha;
+    const r = await fetch(API+"/repos/"+owner+"/"+repo+"/contents/"+cpath(path),
+      {method:"PUT",headers:Object.assign({"Content-Type":"application/json"},headers()),body:JSON.stringify(body)});
+    if(!r.ok) throw new Error(await errText(r));
+    return r.json();
+  }
+  async function doUpload(){
+    readForm();
+    const owner=$("upOwner").value.trim(), repo=$("upRepo").value.trim(), path=$("upPath").value.trim();
+    const f=$("upFile").files[0];
+    if(!owner||!repo||!path||!f){ log("Owner, repo, path aur file — sab chahiye.","warn"); return; }
+    $("upBtn").disabled=true;
+    try{
+      const b64 = await fileToB64(f);
+      let sha=null, existed=false;
+      const info = await apiGetRepo(owner,repo,path);
+      if(info){ sha=info.sha; existed=true; }
+      await apiPutRepo(owner,repo,path,b64,sha,"Upload "+path+" via Playlist Manager");
+      log((existed?"Updated ":"Created ")+path+" in "+owner+"/"+repo+"  ("+f.name+", "+Math.round(f.size/1024)+" KB)","ok");
+      log("URL: https://"+owner+".github.io/"+repo+"/"+path+"   (Pages rebuild ~1 min)","info");
+    }catch(e){ log("Failed: "+e.message,"err"); }
+    finally{ $("upBtn").disabled=false; }
+  }
+
   /* ---------- tabs ---------- */
   document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>{
     document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
@@ -478,6 +541,11 @@ Zee Cinema | https://.../logo.png | https://.../index.m3u8"></textarea>
   $("addBtn").addEventListener("click",addChannel);
   $("bulkBtn").addEventListener("click",bulkAdd);
   $("createBtn").addEventListener("click",createPlaylist);
+  $("upBtn").addEventListener("click",doUpload);
+  $("upFile").addEventListener("change",()=>{
+    const f=$("upFile").files[0];
+    $("upInfo").textContent = f ? ("Selected: "+f.name+"  ("+Math.round(f.size/1024)+" KB)") : "";
+  });
   ["name","logo","url","group","file"].forEach(id=>{ $(id).addEventListener("input",refreshPreview); $(id).addEventListener("change",refreshPreview); });
 
   loadCfg(); refreshPreview();
