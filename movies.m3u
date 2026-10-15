@@ -207,3 +207,5 @@ http://103.151.60.162:2122/play/a01v/index.m3u8?hls
 http://103.151.60.162:2122/play/a012/index.m3u8?hls
 #EXTINF:-1 tvg-id="BizCinemahd" tvg-name="Biz Cinema hd" tvg-logo="https://biztv.uz/static/media/biz-cinema.286b83dc.png" group-title="Movies",Biz Cinema hd
 https://fl.biztv.media/cinema_720_EMfSyXgoRdiIHgldXTZICucKTIeCKO/index.m3u8
+#EXTINF:-1 tvg-id="EPICbhojpuri" tvg-name="EPIC bhojpuri" tvg-logo="https://dtil.tmsimg.com/assets/GNLZZGG0032BVJ8.png?lock720x540" group-title="Movies",EPIC bhojpuri
+https://mumt01.tangotv.in/O5aw8Zn3EPICBHOJPURI/index.m3u8
