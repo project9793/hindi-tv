@@ -197,22 +197,25 @@ Zee Cinema | https://.../logo.png | https://.../index.m3u8"></textarea>
   <div class="card panel" id="p-upload">
     <h2>Upload a file to a repo</h2>
     <p class="hint">Apne phone/computer se koi file (jaise <code>index.html</code>) chuno aur seedha GitHub repo me commit karo &mdash; GitHub kholne ki zaroorat nahi. Agar file pehle se hai to wo replace ho jayegi.</p>
-    <div class="row3">
-      <div><label>Owner</label><input id="upOwner" value="project9793" list="repoList" placeholder="project9793"></div>
-      <div><label>Repository</label><input id="upRepo" value="hindi-tv" list="repoList" placeholder="hindi-tv"></div>
-      <div><label>Path in repo</label><input id="upPath" value="index.html" placeholder="index.html"></div>
+    <div class="row">
+      <div><label>Owner</label><input id="upOwner" value="project9793" placeholder="project9793"></div>
+      <div><label>Repository</label><select id="upRepo"><option value="hindi-tv">hindi-tv</option></select></div>
     </div>
-    <datalist id="repoList">
-      <option value="hindi-tv"></option>
-      <option value="pluto-iptv"></option>
-      <option value="Pluto"></option>
-      <option value="Pluto_Cam"></option>
-      <option value="rail-Alert"></option>
-    </datalist>
+    <label>Path in repo <span class="opt">(naam badalna ho to yahan edit karo &mdash; jaise index.html)</span></label>
+    <input id="upPath" value="index.html" placeholder="index.html">
     <label>File</label>
     <input type="file" id="upFile">
     <p class="muted" id="upInfo" style="margin-top:8px"></p>
     <div class="actions"><button class="btn btn-primary" id="upBtn">Upload to GitHub</button></div>
+
+    <hr style="border:none;border-top:1px solid var(--border);margin:22px 0">
+    <h2 style="font-size:15px">Rename an existing file</h2>
+    <p class="hint">Repo ki kisi file ka naam badalna ho (jaise <code>old.html</code> &rarr; <code>index.html</code>).</p>
+    <div class="row">
+      <div><label>From (current path)</label><input id="rnFrom" placeholder="old.html"></div>
+      <div><label>To (new path)</label><input id="rnTo" placeholder="index.html"></div>
+    </div>
+    <div class="actions"><button class="btn btn-ghost" id="rnBtn">Rename file</button></div>
   </div>
 
   <div id="log"></div>
@@ -283,6 +286,7 @@ Zee Cinema | https://.../logo.png | https://.../index.m3u8"></textarea>
     $("owner").value=cfg.owner||"project9793";
     $("repo").value=cfg.repo||"hindi-tv";
     $("branch").value=cfg.branch||"main";
+    $("upOwner").value=cfg.owner||"project9793";
   }
   function readForm(){ cfg.token=$("token").value.trim(); cfg.owner=$("owner").value.trim(); cfg.repo=$("repo").value.trim(); cfg.branch=($("branch").value.trim()||"main"); }
   function saveCfg(){ readForm(); localStorage.setItem("iptv_cfg",JSON.stringify(cfg)); log("Settings saved.","ok"); }
@@ -317,6 +321,7 @@ Zee Cinema | https://.../logo.png | https://.../index.m3u8"></textarea>
       document.querySelectorAll("select.fileSel").forEach(sel=>{ const cur=sel.value; sel.innerHTML=opts; if(cur)sel.value=cur; });
       log("Loaded "+files.length+" playlists.","ok");
       $("addBtn").disabled=false; $("bulkBtn").disabled=false;
+      loadRepoOptions();
     }catch(e){ log("Could not load playlists: "+e.message,"err"); }
   }
 
@@ -527,6 +532,45 @@ Zee Cinema | https://.../logo.png | https://.../index.m3u8"></textarea>
     finally{ $("upBtn").disabled=false; }
   }
 
+  /* ---------- repo dropdown + rename ---------- */
+  const FALLBACK_REPOS = ["hindi-tv","pluto-iptv","Pluto","Pluto_Cam","rail-Alert"];
+  async function loadRepoOptions(){
+    const sel=$("upRepo"); if(!sel) return;
+    const cur=sel.value;
+    let names=[];
+    try{
+      const r=await fetch(API+"/user/repos?per_page=100&affiliation=owner&sort=updated",{headers:headers()});
+      if(r.ok){ const arr=await r.json(); if(Array.isArray(arr)) names=arr.map(x=>x.name); }
+    }catch(e){}
+    if(!names.length) names=FALLBACK_REPOS.slice();
+    else FALLBACK_REPOS.forEach(n=>{ if(names.indexOf(n)<0) names.push(n); });
+    sel.innerHTML=names.map(n=>'<option value="'+n+'">'+n+'</option>').join("");
+    sel.value = (cur && names.indexOf(cur)>=0) ? cur : (names.indexOf("hindi-tv")>=0 ? "hindi-tv" : names[0]);
+  }
+  async function apiDeleteRepo(owner,repo,path,sha,message){
+    const r=await fetch(API+"/repos/"+owner+"/"+repo+"/contents/"+cpath(path),
+      {method:"DELETE",headers:Object.assign({"Content-Type":"application/json"},headers()),body:JSON.stringify({message,sha,branch:cfg.branch})});
+    if(!r.ok) throw new Error(await errText(r));
+    return r.json();
+  }
+  async function doRename(){
+    readForm();
+    const owner=$("upOwner").value.trim(), repo=$("upRepo").value.trim();
+    const from=$("rnFrom").value.trim(), to=$("rnTo").value.trim();
+    if(!owner||!repo||!from||!to){ log("Owner, repo, From aur To — sab chahiye.","warn"); return; }
+    if(from===to){ log("From aur To same hai.","warn"); return; }
+    $("rnBtn").disabled=true;
+    try{
+      const info=await apiGetRepo(owner,repo,from);
+      if(!info){ log("File nahi mili: "+from,"err"); return; }
+      await apiPutRepo(owner,repo,to,info.content,null,"Rename "+from+" to "+to);
+      await apiDeleteRepo(owner,repo,from,info.sha,"Remove "+from+" after rename");
+      log("Renamed "+from+" \u2192 "+to+" in "+owner+"/"+repo,"ok");
+      $("rnFrom").value=""; $("rnTo").value="";
+    }catch(e){ log("Failed: "+e.message,"err"); }
+    finally{ $("rnBtn").disabled=false; }
+  }
+
   /* ---------- tabs ---------- */
   document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>{
     document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
@@ -542,10 +586,15 @@ Zee Cinema | https://.../logo.png | https://.../index.m3u8"></textarea>
   $("bulkBtn").addEventListener("click",bulkAdd);
   $("createBtn").addEventListener("click",createPlaylist);
   $("upBtn").addEventListener("click",doUpload);
+  $("rnBtn").addEventListener("click",doRename);
+  let upPathTouched=false;
+  $("upPath").addEventListener("input",()=>{ upPathTouched=true; });
   $("upFile").addEventListener("change",()=>{
     const f=$("upFile").files[0];
     $("upInfo").textContent = f ? ("Selected: "+f.name+"  ("+Math.round(f.size/1024)+" KB)") : "";
+    if(f && !upPathTouched) $("upPath").value = f.name;
   });
+  $("upOwner").addEventListener("change",loadRepoOptions);
   ["name","logo","url","group","file"].forEach(id=>{ $(id).addEventListener("input",refreshPreview); $(id).addEventListener("change",refreshPreview); });
 
   loadCfg(); refreshPreview();
