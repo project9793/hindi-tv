@@ -1,21 +1,22 @@
 # India IPTV Playlists
 
-Category-wise IPTV playlists with **only Indian channels**, with channel
-name, channel logo (`tvg-logo`) and stream URL in every entry.
+Category-wise IPTV playlists with **only Indian channels** (name + logo + stream URL).
 
 Base URL: https://project9793.github.io/hindi-tv/
 
+## Android app (APK)
+
+Download and install: **[https://project9793.github.io/hindi-tv/IPTV-Manager.apk](https://project9793.github.io/hindi-tv/IPTV-Manager.apk)**
+
+A small WebView app that opens the Playlist Manager. On your phone, allow
+'Install unknown apps' for your browser/file manager when prompted (the app is
+self-signed, not from Play Store).
+
 ## Playlist Manager (web app)
 
-Open **[the Playlist Manager](https://project9793.github.io/hindi-tv/add-channel.html)** to:
-
-- add a single channel (name + logo + stream URL),
-- **bulk add** many channels at once,
-- **view, edit and delete** channels in any playlist,
-- create new playlist files.
-
-It commits straight to this repo. Needs a GitHub fine-grained token
-(Contents: Read and write) for this repo.
+Open **[the Playlist Manager](https://project9793.github.io/hindi-tv/add-channel.html)** to add a single channel,
+bulk-add many channels, or view/edit/delete channels in any playlist.
+It needs a GitHub fine-grained token (Contents: Read and write) for this repo.
 
 ## Playlists
 
