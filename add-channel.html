@@ -65,7 +65,7 @@
   .chk input{width:auto}
   pre{background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:12px 14px;font-family:var(--font-mono);font-size:12.5px;overflow-x:auto;white-space:pre-wrap;word-break:break-all;margin:14px 0 0}
   #log{margin-top:16px;display:flex;flex-direction:column;gap:8px;max-height:240px;overflow:auto}
-  .msg{font-size:13px;padding:9px 12px;border-radius:9px;border:1px solid var(--border);font-family:var(--font-mono)}
+  .msg{font-size:13px;padding:9px 12px;border-radius:9px;border:1px solid var(--border);font-family:var(--font-mono);white-space:pre-wrap}
   .msg.ok{background:var(--ok-dim);color:var(--ok);border-color:transparent}
   .msg.err{background:var(--err-dim);color:var(--err);border-color:transparent}
   .msg.info{background:var(--surface-2);color:var(--text-dim)}
@@ -213,7 +213,13 @@ Zee Cinema | https://.../logo.png | https://.../index.m3u8"></textarea>
   const headers = () => ({"Authorization":"Bearer "+cfg.token,"Accept":"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"});
   const cpath = p => encodeURIComponent(p).replace(/%2F/g,"/");
   const pagesUrl = () => "https://"+cfg.owner+".github.io/"+cfg.repo;
-  async function errText(r){ let m=r.status+" "+r.statusText; try{const j=await r.json(); if(j.message)m+=" — "+j.message;}catch(e){} return m; }
+  async function errText(r){
+    let m=r.status+" "+r.statusText;
+    try{ const j=await r.json(); if(j.message) m+=" — "+j.message; }catch(e){}
+    if(r.status===403) m+="\n→ Token me is repo ke liye 'Contents: Read and write' permission honi chahiye. GitHub → Settings → Personal access tokens → token ko Edit karo → Contents = Read and write → Update. (Token badalna nahi padega.)";
+    if(r.status===401) m+="\n→ Token galat ya expire ho gaya hai. Naya token banao aur yahan paste karo.";
+    return m;
+  }
 
   async function apiGet(path){
     const r = await fetch(API+"/repos/"+cfg.owner+"/"+cfg.repo+"/contents/"+cpath(path)+"?ref="+encodeURIComponent(cfg.branch),{headers:headers()});
