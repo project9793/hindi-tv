@@ -199,7 +199,13 @@ Zee Cinema | https://.../logo.png | https://.../index.m3u8"></textarea>
     <p class="hint">Apne phone/computer se koi file (jaise <code>index.html</code>) chuno aur seedha GitHub repo me commit karo &mdash; GitHub kholne ki zaroorat nahi. Agar file pehle se hai to wo replace ho jayegi.</p>
     <div class="row">
       <div><label>Owner</label><input id="upOwner" value="project9793" placeholder="project9793"></div>
-      <div><label>Repository</label><select id="upRepo"><option value="hindi-tv">hindi-tv</option></select></div>
+      <div><label>Repository</label><select id="upRepo">
+        <option value="hindi-tv">hindi-tv</option>
+        <option value="pluto-iptv">pluto-iptv</option>
+        <option value="Pluto">Pluto</option>
+        <option value="Pluto_Cam">Pluto_Cam</option>
+        <option value="rail-Alert">rail-Alert</option>
+      </select></div>
     </div>
     <label>Path in repo <span class="opt">(naam badalna ho to yahan edit karo &mdash; jaise index.html)</span></label>
     <input id="upPath" value="index.html" placeholder="index.html">
@@ -598,6 +604,7 @@ Zee Cinema | https://.../logo.png | https://.../index.m3u8"></textarea>
   ["name","logo","url","group","file"].forEach(id=>{ $(id).addEventListener("input",refreshPreview); $(id).addEventListener("change",refreshPreview); });
 
   loadCfg(); refreshPreview();
+  loadRepoOptions();
   if(cfg.token&&cfg.owner&&cfg.repo) loadPlaylists();
 })();
 </script>
